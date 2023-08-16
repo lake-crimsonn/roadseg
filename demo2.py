@@ -23,12 +23,15 @@ n_classes = 7
 model = pspunet((IMG_HEIGHT, IMG_WIDTH, 3), n_classes)
 model.load_weights("pspunet_weight.h5")
 
+count = 0
+
 while True:
     start = time.time()
 
     _, frame = cap.read()
 
-    if (frame % 3 == 0).all() and (frame % 5 == 0).all():
+    if count % 3 == 0 and count % 5 == 0:
+        count += 1
         continue
 
     frame = cv2.resize(frame, (IMG_WIDTH, IMG_HEIGHT))
